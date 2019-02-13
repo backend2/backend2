@@ -4,49 +4,59 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.backend2.core.DataSetterEmpty;
 import org.backend2.core.Ent;
 import org.backend2.core.Prop;
 import org.backend2.core.prop.IntProp;
+import org.backend2.core.prop.StringProp;
 
 class ABookEnt implements Ent {
 	private final ABook book;
+	private final Setter setter;
+	//
+	public final IntProp size;
+	public final StringProp name;
 
-	public IntProp size = new IntProp() {
+	private static class Setter extends DataSetterEmpty<ABook> {
 
-		@Override
-		public void set(int size) {
-			book.setSize(size);
+		public Setter(ABook data) {
+			super(data);
 		}
 
 		@Override
-		public int get() {
-			return book.getSize();
-		}
-	};
-	
-	public Prop<String> name = new Prop<String>() {
-
-		public String getValue() {
-			return book.getName();
+		public int getInt(int columnIndex) {
+			if (columnIndex == 1) {
+				return data.getSize();
+			}
+			return super.getInt(columnIndex);
 		}
 
-		public void setValue(String name) {
-			book.setName(name);
-		}
-		
-	};
-
-	public Prop<String> p2 = new Prop<String>() {
-
-		public String getValue() {
-			return book.getName();
+		@Override
+		public void setInt(int columnIndex, int value) {
+			if (columnIndex == 1) {
+				data.setSize(value);
+				return;
+			}
+			super.setInt(columnIndex, value);
 		}
 
-		public void setValue(String name) {
-			book.setName(name);
+		@Override
+		public String getString(int columnIndex) {
+			if (columnIndex == 2) {
+				return data.getName();
+			}
+			return super.getString(columnIndex);
 		}
-		
-	};
+
+		@Override
+		public void setString(int columnIndex, String value) {
+			if (columnIndex == 2) {
+				data.setName(value);
+				return;
+			}
+			super.setString(columnIndex, value);
+		}
+	}
 
 	ABookEnt() {
 		this(new Book());
@@ -54,6 +64,10 @@ class ABookEnt implements Ent {
 
 	ABookEnt(ABook book) {
 		this.book = book;
+		this.setter = new Setter(book);
+		//
+		size = new IntProp(setter, 1);
+		name = new StringProp(setter, 2);
 		propertiesMap.put("size", size);
 		propertiesMap.put("name", name);
 	}

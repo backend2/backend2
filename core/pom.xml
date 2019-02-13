@@ -6,16 +6,18 @@
 		<groupId>org.backend2</groupId>
 		<artifactId>be2parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>be2core</artifactId>
 	<name>be2core</name>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	
-	<properties>
-      <maven.compiler.source>1.8</maven.compiler.source>
-      <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-
+		
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>			
+			<scope>test</scope>			
+		</dependency>
+	</dependencies>
 </project>

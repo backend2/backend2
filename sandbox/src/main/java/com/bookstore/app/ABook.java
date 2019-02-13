@@ -1,8 +1,6 @@
 package com.bookstore.app;
 
 import org.backend2.core.Data;
-import org.backend2.core.DataSetter;
-import org.backend2.core.DataSetterEmpty;
 import org.backend2.core.Name;
 
 class ABook implements Data<BookEnt> {
@@ -14,11 +12,7 @@ class ABook implements Data<BookEnt> {
 	private String name;
 	//
 	private BookEnt entity;
-	
-	private DataSetter setter;
-	
-	//private static class Setter 
-	
+		
     ABook () {		
 	}
 	
@@ -43,12 +37,5 @@ class ABook implements Data<BookEnt> {
 			entity = new BookEnt(this);
 		}
 		return entity;
-	}
-
-	public synchronized DataSetter setter() {
-		if (setter == null) {
-			setter = new ABookSetter(this);
-		}
-		return setter;
 	}
 }

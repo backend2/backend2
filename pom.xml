@@ -6,9 +6,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>be2parent</name>
+	
 	<modules>
-		<module>core</module>
-		<module>be2sandbox</module>		
+		<module>be2core</module>
+		<module>be2sandbox</module>
 	</modules>
 	
 	<properties>
@@ -16,12 +17,14 @@
       <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 	
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+	   <dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+	   </dependencies>
+	</dependencyManagement>
 </project>

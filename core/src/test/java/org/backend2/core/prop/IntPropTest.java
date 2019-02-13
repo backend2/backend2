@@ -6,38 +6,35 @@ import static org.junit.Assert.assertNull;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.backend2.core.prop.IntProp;
+import org.backend2.core.DataSetterEmpty;
 import org.junit.Test;
 
 public class IntPropTest {
 
-	private class InlineIntProp extends IntProp {
+	private class Setter extends DataSetterEmpty<Void> {
+		private int value;
 
-		private int i;
-
-		public InlineIntProp() {
-			super();
-		}
-
-		public InlineIntProp(boolean allowNull, int nullValue) {
-			super(allowNull, nullValue);
+		public Setter() {
+			super(null);
 		}
 
 		@Override
-		public int get() {
-			return i;
+		public int getInt(int columnIndex) {
+			return value;
 		}
 
 		@Override
-		public void set(int val) {
-			i = val;
+		public void setInt(int columnIndex, int value) {
+			this.value = value;
 		}
 
-	}
+	};
+
+	
 
 	@Test
 	public void testSetValNullValueZero() {
-		InlineIntProp p = new InlineIntProp();
+		IntProp p = new IntProp(new Setter(), 1);
 		// default is null
 		assertNull(p.getValue());
 		assertEquals(0, p.get());
@@ -61,7 +58,7 @@ public class IntPropTest {
 
 	@Test
 	public void testSetValNullValueMinusOne_AllowNullYes() {
-		InlineIntProp p = new InlineIntProp(true, -1);
+		IntProp p = new IntProp(new Setter(), 1, true, -1);
 		// default is 0
 		assertEquals(Integer.valueOf(0), p.getValue());
 		assertEquals(0, p.get());
@@ -86,10 +83,10 @@ public class IntPropTest {
 		assertEquals(Integer.valueOf(2), p.getValue());
 		assertEquals(2, p.get());
 	}
-	
+
 	@Test
-	public void testSetValNullValueMinusOne_AllowNullNo() {
-		InlineIntProp p = new InlineIntProp(false, -1);
+	public void testSetValNullValueMinusOne_AllowNullNo() {		
+		IntProp p = new IntProp(new Setter(), 1, false, -1);
 		// default is 0
 		assertEquals(Integer.valueOf(0), p.getValue());
 		assertEquals(0, p.get());
@@ -114,7 +111,7 @@ public class IntPropTest {
 		assertEquals(Integer.valueOf(2), p.getValue());
 		assertEquals(2, p.get());
 	}
-	
+
 	public void testSql() throws SQLException {
 		ResultSet rs = null;
 		rs.getString(1);

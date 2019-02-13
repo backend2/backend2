@@ -16,6 +16,10 @@ public interface DataSetter<D> {
 	public Integer getInteger(int columnIndex);
 	public void setInteger(int columnIndex, Integer value);
 	
+	// int
+	public int getInt(int columnIndex);
+	public void setInt(int columnIndex, int value);
+	
 	// Byte
 	public Byte getByte(int columnIndex);
 	public void setByte(int columnIndex, Byte value);
@@ -23,6 +27,10 @@ public interface DataSetter<D> {
 	// Character
 	public Character getCharacter(int columnIndex);
 	public void setCharacter(int columnIndex, Character value);
+	
+	// boolean
+	public boolean getBooleanPrim(int columnIndex);
+	public void setBooleanPrim(int columnIndex, boolean value);
 	
 	// Boolean
 	public Boolean getBoolean(int columnIndex);
