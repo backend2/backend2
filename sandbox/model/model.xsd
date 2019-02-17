@@ -1,0 +1,79 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- Relational model -->
+  <xsd:complexType name="ColumnXml">
+     <xsd:attribute name="name" type="xsd:string" use="required" />
+     <xsd:attribute name="type" type="xsd:string" use="required" />
+     <xsd:attribute name="nullable" type="xsd:boolean" />
+     <xsd:attribute name="length" type="xsd:int" />
+     <xsd:attribute name="precision" type="xsd:int" />
+     <xsd:attribute name="scale" type="xsd:int" />
+     <xsd:attribute name="primaryKey" type="xsd:boolean" />
+     <xsd:attribute name="autoIncrement" type="xsd:boolean" />
+     <xsd:attribute name="default" type="xsd:string" />     
+  </xsd:complexType>
+  
+  <xsd:complexType name="ColumnsXml">
+     <xsd:sequence>
+        <xsd:element name="column" minOccurs="1" maxOccurs="unbounded" type="ColumnXml" />
+     </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="IndexColumnXml">
+     <xsd:attribute name="name" type="xsd:string" use="required" />
+     <xsd:attribute name="order" type="xsd:string" />     
+  </xsd:complexType>
+  
+  <xsd:complexType name="IndexXml">
+     <xsd:sequence>
+        <xsd:element name="column" minOccurs="1" maxOccurs="unbounded" type="IndexColumnXml" />
+     </xsd:sequence>
+     <xsd:attribute name="name" type="xsd:string" use="required" />
+     <xsd:attribute name="unique" type="xsd:boolean" />     
+  </xsd:complexType>   
+  
+  <xsd:complexType name="IndexesXml">
+     <xsd:sequence>
+        <xsd:element name="index" minOccurs="1" maxOccurs="unbounded" type="IndexXml" />
+     </xsd:sequence>
+  </xsd:complexType>
+    
+  <xsd:complexType name="TableXml">     
+     <xsd:sequence>
+       <xsd:element name="columns" type="ColumnsXml" />
+       <xsd:element name="indexes" type="IndexesXml" minOccurs="0" maxOccurs="1" />
+     </xsd:sequence>     
+     <xsd:attribute name="name" type="xsd:string" use="required"/>
+     <xsd:attribute name="schema" type="xsd:string" />
+     <xsd:attribute name="sequence" type="xsd:string" />         
+  </xsd:complexType>
+  
+  <!-- Entity relationship model  -->
+  <xsd:complexType name="PropertiesXml">
+     <xsd:sequence>
+        <xsd:element name="property" minOccurs="1" maxOccurs="unbounded" type="PropertyXml" />
+     </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="PropertyXml">
+     <xsd:attribute name="name" type="xsd:string" use="required" />
+     <xsd:attribute name="type" type="xsd:string" use="required" />
+     <xsd:attribute name="column" type="xsd:string" />
+     <xsd:attribute name="default" type="xsd:string" />
+     <xsd:attribute name="virtual" type="xsd:boolean" />
+  </xsd:complexType>
+    
+  <xsd:complexType name="EntityXml">
+     <xsd:sequence>
+       <xsd:element name="properties" type="PropertiesXml" />
+     </xsd:sequence>  
+     <xsd:attribute name="name" type="xsd:string" use="required" />
+     <xsd:attribute name="table" type="xsd:string" />
+     <xsd:attribute name="schema" type="xsd:string" />
+     <xsd:attribute name="virtual" type="xsd:boolean" />          
+  </xsd:complexType>  
+
+  <xsd:element name="table" type="TableXml"/>
+    
+  <xsd:element name="comment" type="xsd:string"/>
+  
+</xsd:schema>
