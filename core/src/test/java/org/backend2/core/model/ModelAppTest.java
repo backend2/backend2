@@ -6,14 +6,11 @@ public class ModelAppTest extends ModelTest {
 	public void setup() {
 		model = ModelApp.builder() //
 				.setName("name") //
-				.setParent(PARENT) //
 				.build();
-
 	}
 
 	@Override
 	public ModelType type() {
 		return ModelType.APP;
 	}
-
 }

@@ -10,31 +10,32 @@ public abstract class ModelColumn implements Model {
 		return ModelType.COLUMN;
 	}
 
-	abstract DataType dataType();
+	public abstract DataType dataType();
 
-	abstract int length();
+	public abstract int length();
 
-	abstract int precision();
+	public abstract int precision();
 
-	abstract int scale();
+	public abstract int scale();
 
-	abstract boolean primaryKey();
+	public abstract boolean primaryKey();
 
 	@AutoValue.Builder
-	abstract static class Builder extends Model.Builder<ModelColumn, Builder> {
+	public abstract static class Builder extends Model.Builder<ModelColumn, Builder> {
 
-		abstract Builder setDataType(DataType dataType);
+		public abstract Builder setDataType(DataType dataType);
 
-		abstract Builder setLength(int length);
+		public abstract Builder setLength(int length);
 
-		abstract Builder setPrecision(int precision);
+		public abstract Builder setPrecision(int precision);
 
-		abstract Builder setScale(int scale);
+		public abstract Builder setScale(int scale);
 
-		abstract Builder setPrimaryKey(boolean primaryKey);
+		public abstract Builder setPrimaryKey(boolean primaryKey);
 	}
 
-	static Builder builder() {
+	// TODO public?
+	public static Builder builder() {
 		return new AutoValue_ModelColumn.Builder()//
 				.setPrimaryKey(false);
 	}

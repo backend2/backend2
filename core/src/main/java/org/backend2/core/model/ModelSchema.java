@@ -9,19 +9,22 @@ public abstract class ModelSchema implements Model {
 	public ModelType type() {
 		return ModelType.SCHEMA;
 	}
-	
+
 	abstract boolean isDefault();
-	
+
 	abstract boolean tenant();
 
 	@AutoValue.Builder
-	abstract static class Builder extends Model.Builder<ModelSchema, Builder> {		
+	abstract static class Builder extends Model.Builder<ModelSchema, Builder> {
 		abstract Builder setIsDefault(boolean isDefault);
+
 		abstract Builder setTenant(boolean tenant);
 	}
 
 	static Builder builder() {
-		return new AutoValue_ModelSchema.Builder();
+		return new AutoValue_ModelSchema.Builder() //
+				.setIsDefault(false) //
+				.setTenant(false);
 	}
 
 	abstract Builder toBuilder();

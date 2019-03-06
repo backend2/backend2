@@ -10,36 +10,23 @@ import org.junit.Test;
 
 public abstract class ModelTest {
 	protected Model model;
-	public static final Model PARENT = new Model() {
-
-		@Override
-		public String name() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ModelType type() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Model parent() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public Model clone() {
-			return this;
-		}
-
-	};
 
 	@Before
 	public abstract void setup();
 
 	public abstract ModelType type();
+
+	@Test
+	public void testClassName() {
+		// System.out.println(model.getClass().getSimpleName());
+		String simpleName = model.getClass().getSimpleName();
+		assertTrue(simpleName.startsWith("Model") || simpleName.startsWith("AutoValue_Model"));
+		String typeName = ("Model" + model.type()).toLowerCase();
+		// Class model name in sync with type property
+		assertTrue(simpleName.toLowerCase().endsWith(typeName));
+		// this test
+		assertEquals(typeName + "test", getClass().getSimpleName().toLowerCase());
+	}
 
 	@Test
 	public void testType() {

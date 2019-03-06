@@ -4,11 +4,15 @@ import java.util.Collections;
 
 public class ModelTableTest extends ModelTest {
 
+	public static final ModelTable TABLE = ModelTable.builder() //
+			.setName("person") //
+			.setColumns(Collections.singleton(ModelColumnTest.COLUMN))//
+			.build();
+
 	@Override
 	public void setup() {
 		model = ModelTable.builder()//
 				.setName("person")//
-				.setParent(PARENT)//
 				.setColumns(Collections.singleton(ModelColumnTest.COLUMN))//
 				.build();
 	}

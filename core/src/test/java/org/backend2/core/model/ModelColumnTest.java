@@ -5,7 +5,6 @@ public class ModelColumnTest extends ModelTest {
 	public static final ModelColumn COLUMN = ModelColumn.builder() //
 			.setName("price") //
 			.setDataType(DataType.DECIMAL) //
-			.setParent(PARENT) //
 			.setLength(14) //
 			.setPrecision(12) //
 			.setScale(2) //
@@ -16,12 +15,10 @@ public class ModelColumnTest extends ModelTest {
 		model = ModelColumn.builder() //
 				.setName("name") //
 				.setDataType(DataType.STRING) //
-				.setParent(PARENT) //
 				.setLength(10) //
 				.setPrecision(12) //
 				.setScale(2) //
 				.build();
-
 	}
 
 	@Override

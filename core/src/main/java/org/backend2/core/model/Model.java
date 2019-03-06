@@ -1,18 +1,21 @@
 package org.backend2.core.model;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 public interface Model extends Cloneable {
 	public String name();
 
 	public ModelType type();
 
+	@Nullable
 	public Model parent();
 
 	static abstract class Builder<M, B> {
-		abstract B setName(String name);
+		public abstract B setName(String name);
 
-		abstract B setParent(Model parent);
+		public abstract B setParent(@Nullable Model parent);
 
-		abstract M build();
+		public abstract M build();
 	}
 
 	public Model clone();
